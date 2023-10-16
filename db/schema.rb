@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_05_113345) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_16_063824) do
   create_table "articles", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.string "name"
+    t.integer "total_page"
+    t.integer "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_books_on_author_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -29,4 +44,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_113345) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "books", "authors"
 end
